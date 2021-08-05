@@ -384,11 +384,6 @@ public class Target: NSObject, Extension {
             return
         }
 
-        // dispatch internal analytics for target event with click-tracking analytics payload, if available
-        if let analyticsPayload = metric.analyticsPayload {
-            dispatchAnalyticsForTargetRequest(payload: preprocessAnalyticsPayload(analyticsPayload, sessionId: targetState.sessionId))
-        }
-
         // bail out if the target configuration is not available or if the privacy is opted-out
         if let error = prepareForTargetRequest() {
             Log.warning(label: Target.LOG_TAG, TargetError.ERROR_CLICK_NOTIFICATION_NOT_SENT + error)
@@ -404,6 +399,11 @@ public class Target: NSObject, Extension {
         if !addClickedNotification(mboxJson: mboxJson, targetParameters: event.targetParameters, lifecycleData: lifecycleSharedState, timestamp: timeInMills) {
             Log.debug(label: Target.LOG_TAG, "handleLocationClicked - \(mboxName) mbox not added for click notification.")
             return
+        }
+
+        // dispatch internal analytics for target event with click-tracking analytics payload, if available
+        if let analyticsPayload = metric.analyticsPayload {
+            dispatchAnalyticsForTargetRequest(payload: preprocessAnalyticsPayload(analyticsPayload, sessionId: targetState.sessionId))
         }
 
         let error = sendTargetRequest(event, targetParameters: event.targetParameters, lifecycleData: lifecycleSharedState, identityData: identitySharedState) { connection in

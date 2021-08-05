@@ -28,7 +28,6 @@ echo "// swift-tools-version:5.1
 import PackageDescription
 let package = Package(
     name: \"TestProject\",
-    defaultLocalization: \"en-US\",
     platforms: [
         .iOS(.v10)
     ],
@@ -39,8 +38,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: \"AEPCore\", url: \"https://github.com/adobe/aepsdk-core-ios.git\", .upToNextMajor(from:\"3.1.0\")),
-        .package(name: \"AEPTarget\", path: \"../\")
+        .package(url: \"https://github.com/adobe/aepsdk-core-ios.git\", .upToNextMajor(from:\"3.1.0\")),
+        .package(path: \"../\")
     ],
     targets: [
         .target(

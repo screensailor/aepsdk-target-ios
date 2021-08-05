@@ -39,7 +39,7 @@ public class TargetRequest: NSObject, Codable {
     ///   - name: `String` mbox name for this request
     ///   - defaultContent: `String` default content for this request
     ///   - targetParameters: `TargetParameters` for this request
-    ///   - contentWithDataCallback: which will get called with target mbox content, and a dictionary containing optional response tokens, analytics payload, and click metric analytics payload.
+    ///   - contentWithDataCallback: which will get called with target mbox content, and an optional dictionary containing one or more of response tokens, analytics payload, and click metric analytics payload, if available.
     @objc public init(mboxName: String, defaultContent: String, targetParameters: TargetParameters? = nil, contentWithDataCallback: ((String?, [String: Any]?) -> Void)? = nil) {
         name = mboxName
         self.defaultContent = defaultContent
