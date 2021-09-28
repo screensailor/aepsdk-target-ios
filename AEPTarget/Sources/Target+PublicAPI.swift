@@ -64,8 +64,8 @@ import Foundation
         }
 
         let event = Event(name: TargetConstants.EventName.PREFETCH_REQUESTS, type: EventType.target, source: EventSource.requestContent, data: eventData)
-
-        MobileCore.dispatch(event: event) { responseEvent in
+        
+        MobileCore.dispatch(event: event, timeout: 60) { responseEvent in
             guard let responseEvent = responseEvent else {
                 completion(TargetError(message: TargetError.ERROR_TIMEOUT))
                 return
